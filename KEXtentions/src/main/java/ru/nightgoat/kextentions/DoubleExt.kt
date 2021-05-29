@@ -1,9 +1,10 @@
+import android.util.Log
 import kotlin.math.pow
 import kotlin.math.round
 
 /**
-* Returns string from double without zeroes at the end
-*/
+ * Returns string from double without zeroes at the end
+ */
 fun Double?.dropZeros(): String {
     if (this == null) {
         return "0"
@@ -19,8 +20,8 @@ fun Double?.orZero(): Double {
 }
 
 /**
-* Basic algebraic functions, helps to avoid Floating Point Math errors
-*/
+ * Basic algebraic functions, helps to avoid Floating Point Math errors
+ */
 fun Double?.sumWith(other: Double?, numberOfZeroes: Int = 3): Double {
     val sum = ((this ?: 0.0).toBigDecimal() + (other ?: 0.0).toBigDecimal()).toDouble()
     return sum.roundTo(numberOfZeroes)
@@ -47,7 +48,7 @@ fun Double.divWith(other: Double, numberOfZeroes: Int = 3): Double? {
         val pow = ((this).toBigDecimal() / (other).toBigDecimal()).toDouble()
         pow.roundTo(numberOfZeroes)
     } else {
-      //pls add logging here
+        Log.e("Double.divWith()", "Division by zero: $this / $other")
         null
     }
 }

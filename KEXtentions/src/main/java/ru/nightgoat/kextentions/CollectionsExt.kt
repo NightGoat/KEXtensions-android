@@ -4,7 +4,8 @@ fun <T> Set<T>?.orEmptyMutable(): MutableSet<T> = this?.toMutableSet() ?: mutabl
 
 fun <T, K> Map<T, K>?.orEmptyMutable(): MutableMap<T, K> = this?.toMutableMap() ?: mutableMapOf()
 
-fun <T, K> List<Pair<T, K>>?.orEmptyMutableMap(): MutableMap<T, K> = this?.toMutableMap() ?: mutableMapOf()
+fun <T, K> List<Pair<T, K>>?.orEmptyMutableMap(): MutableMap<T, K> =
+    this?.toMutableMap() ?: mutableMapOf()
 
 fun <K, V> Iterable<Pair<K, V>>.toMutableMap(): MutableMap<K, V> {
     if (this is Collection) {
@@ -24,10 +25,13 @@ fun <T> MutableCollection<T>.addIf(predicate: Boolean, whatToAdd: () -> T) {
 }
 
 /**
-* Distincts and filter Iterable in one cycle. Faster that using
-* list.distinctBy {  }.filter {  }
-*/
-inline fun <T, K> Iterable<T>.distinctAndFilter(distinctBy: (T) -> K, filterBy: (T) -> Boolean): List<T> {
+ * Distincts and filter Iterable in one cycle. Faster that using
+ * list.distinctBy {  }.filter {  }
+ */
+inline fun <T, K> Iterable<T>.distinctAndFilter(
+    distinctBy: (T) -> K,
+    filterBy: (T) -> Boolean
+): List<T> {
     val set = HashSet<K>()
     val list = ArrayList<T>()
     for (e in this) {
@@ -39,9 +43,9 @@ inline fun <T, K> Iterable<T>.distinctAndFilter(distinctBy: (T) -> K, filterBy: 
 }
 
 /**
-* Uses sumWith from DoubleExt to avoid algebraic errors
-* @see sumWith
-*/
+ * Uses sumWith from DoubleExt to avoid algebraic errors
+ * @see sumWith
+ */
 inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
     var sum = 0.0
     for (element in this) {
@@ -49,7 +53,6 @@ inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
     }
     return sum
 }
-
 
 inline fun <reified T> Collection<T>.firstOrElse(elseFun: () -> T): T {
     return this.firstOrNull().orIfNull(elseFun)

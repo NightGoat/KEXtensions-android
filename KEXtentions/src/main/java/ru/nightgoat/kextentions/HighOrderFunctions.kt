@@ -1,3 +1,4 @@
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -27,12 +28,11 @@ suspend fun <T> doOnIO(doFun: () -> T) = withContext(Dispatchers.IO) {
 * try default fun realisation
 */
 fun <T : Any> tryOrDefault(defaultIfCatches: T, tryFunc: () -> T): T {
-  return try {
-    tryFunc()
+    return try {
+        tryFunc()
     } catch (e: Exception) {
-      //pls add logging here,
-      //for example in android: Log.e ("tag", "tryOrDefault exception: ${e.message}", e)
-      defaultIfCatches
+        Log.e("tryOrDefault", "exception: ${e.message}", e)
+        defaultIfCatches
     }
 }
 
@@ -40,8 +40,7 @@ fun <T : Any> tryOrNull(tryFunc: () -> T): T? {
     return try {
         tryFunc()
     } catch (e: Exception) {
-        //pls add logging here,
-        //for example in android: Log.e ("tag", "tryOrNull exception: ${e.message}", e)
+        Log.e("tryOrNull", "exception: ${e.message}", e)
         null
     }
 }
