@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/NightGoat/KEXtentions.svg)](https://jitpack.io/#NightGoat/KEXtentions)
 # KEXtentions
-## ALPHA version
+## This is ALPHA version. Dont use in production code!
 Kotlin and Android extentions library.
 
 ## How to add it:
