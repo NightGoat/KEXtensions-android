@@ -40,10 +40,10 @@ inline fun <T, K> Iterable<T>.distinctAndFilter(distinctBy: (T) -> K, filterBy: 
 
 /**
 * Uses sumWith from DoubleExt to avoid algebraic errors
-* @see DoubleExt
+* @see sumWith
 */
 inline fun <T> Iterable<T>.sumByDoubleSafe(selector: (T) -> Double): Double {
-    var sum: Double = 0.0
+    var sum = 0.0
     for (element in this) {
         sum = sum.sumWith(selector(element))
     }
