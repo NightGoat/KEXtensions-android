@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
 
@@ -8,7 +9,7 @@ fun ViewModel.launchUITryCatch(
     try {
         viewModelScope.launch(viewModelScope.coroutineContext, start, tryBlock)
     } catch (e: Throwable) {
-        //pls add logging here
+        Log.e("launchUITryCatch", "catched exception: ${e.message}", e)
         catchBlock?.invoke(e)
     }
 }
@@ -22,7 +23,7 @@ fun ViewModel.launchAsyncTryCatch(
     try {
         launchAsync(dispatcher, start, tryBlock)
     } catch (e: Throwable) {
-        //pls add logging here
+        Log.e("launchAsyncTryCatch", "catched exception: ${e.message}", e)
         catchBlock?.invoke(e)
     }
 }
@@ -48,7 +49,7 @@ fun <T> ViewModel.asyncTryCatchLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        //pls add logging here
+        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e)
         catchBlock?.invoke(e)
     }
 }
@@ -61,7 +62,7 @@ fun <T> ViewModel.asyncTryCatchMutableLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        //pls add logging here
+        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e)
         catchBlock?.invoke(e)
     }
 } as MutableLiveData<T>

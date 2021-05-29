@@ -8,15 +8,15 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.text.format.Formatter
+import android.util.Log
 import android.util.TypedValue
 import kotlin.system.exitProcess
 
+@Suppress("DEPRECATION")
 fun Context.getDeviceIp(): String {
     val wm = this.getSystemService(Context.WIFI_SERVICE) as WifiManager
-    @Suppress("DEPRECATION")
     return Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
 }
-
 
 @SuppressLint("HardwareIds")
 fun Context.getDeviceId(): String {
@@ -56,18 +56,17 @@ fun Context.openAnotherApp(packageName: String) {
         try {
             startActivity(launchIntent)
         } catch (e: Exception) {
-            //pls add logging here
+            Log.e("openAnotherApp", "exception: ${e.message}", e)
         }
     }
 }
 
 fun Context.getApplicationName(packageName: String = this.packageName): String {
     val pm = applicationContext.packageManager
-    var applicationInfo: ApplicationInfo?
-    try {
-        applicationInfo = pm.getApplicationInfo(packageName, 0)
+    val applicationInfo: ApplicationInfo? = try {
+        pm.getApplicationInfo(packageName, 0)
     } catch (e: PackageManager.NameNotFoundException) {
-        applicationInfo = null
+        null
     }
     return (if (applicationInfo != null) pm.getApplicationLabel(applicationInfo) else "(unknown)") as String
 }
