@@ -9,7 +9,7 @@ fun MutableLiveData<Boolean>.revert() {
             value = !it
         }
     } catch (e: IllegalStateException) {
-        Log.e("revert()", "posting value in background thread!", e)
+        Log.e("revert()", "posting value in background thread!", e) // TODO: 31.05.2021  
         revertAsync()
     }
 }

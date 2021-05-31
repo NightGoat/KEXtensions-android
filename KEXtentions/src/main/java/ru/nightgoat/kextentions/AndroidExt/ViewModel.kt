@@ -9,7 +9,7 @@ fun ViewModel.launchUITryCatch(
     try {
         viewModelScope.launch(viewModelScope.coroutineContext, start, tryBlock)
     } catch (e: Throwable) {
-        Log.e("launchUITryCatch", "catched exception: ${e.message}", e)
+        Log.e("launchUITryCatch", "catched exception: ${e.message}", e) // TODO: 31.05.2021  
         catchBlock?.invoke(e)
     }
 }
@@ -23,7 +23,7 @@ fun ViewModel.launchAsyncTryCatch(
     try {
         launchAsync(dispatcher, start, tryBlock)
     } catch (e: Throwable) {
-        Log.e("launchAsyncTryCatch", "catched exception: ${e.message}", e)
+        Log.e("launchAsyncTryCatch", "catched exception: ${e.message}", e) // TODO: 31.05.2021  
         catchBlock?.invoke(e)
     }
 }
@@ -49,7 +49,7 @@ fun <T> ViewModel.asyncTryCatchLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e)
+        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e) // TODO: 31.05.2021  
         catchBlock?.invoke(e)
     }
 }
@@ -62,7 +62,7 @@ fun <T> ViewModel.asyncTryCatchMutableLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e)
+        Log.e("asyncTryCatchLiveData", "catched exception: ${e.message}", e) // TODO: 31.05.2021  
         catchBlock?.invoke(e)
     }
 } as MutableLiveData<T>
