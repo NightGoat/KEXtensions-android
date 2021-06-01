@@ -56,7 +56,7 @@ fun Context.openAnotherApp(packageName: String, tag: String = "openAnotherApp()"
         try {
             startActivity(launchIntent)
         } catch (e: Exception) {
-            Kex.logE(tag, "exception: ${e.message}", e)
+            Kex.loggE(tag, "exception: ${e.message}", e)
         }
     }.logIfNull("launch intent null!", tag)
 }
@@ -66,7 +66,7 @@ fun Context.getApplicationName(packageName: String = this.packageName, tag: Stri
     val applicationInfo: ApplicationInfo? = try {
         pm.getApplicationInfo(packageName, 0)
     } catch (e: PackageManager.NameNotFoundException) {
-        Kex.logE("package manager null", tag, e)
+        Kex.loggE("package manager null", tag, e)
         null
     }
     return applicationInfo?.let {

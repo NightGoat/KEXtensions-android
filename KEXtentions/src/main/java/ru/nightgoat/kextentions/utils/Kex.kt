@@ -19,7 +19,7 @@ object Kex {
         return this
     }
 
-    fun logE(message: String, tag: String? = null, e: Throwable? = null) {
+    fun loggE(message: String, tag: String? = null, e: Throwable? = null) {
         logger.loggE(message, tag, e)
     }
 }

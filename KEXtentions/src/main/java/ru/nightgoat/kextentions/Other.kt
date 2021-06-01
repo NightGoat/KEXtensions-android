@@ -1,4 +1,3 @@
-import android.util.Log
 import ru.nightgoat.kextentions.utils.Kex
 
 /**
@@ -28,7 +27,7 @@ fun <T, V> T?.orLet(variable: V?, letBlock: (V) -> T) = this ?: variable?.let(le
  */
 fun <T : Any> T?.logIfNull(message: String, tag: String = "logIfNull"): T? {
     if (this == null) {
-        Kex.logE(tag, message)
+        Kex.loggE(tag, message)
     }
     return this
 }

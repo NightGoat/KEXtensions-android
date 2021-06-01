@@ -49,7 +49,7 @@ fun Double.divWith(other: Double, numberOfZeroes: Int = 3, tag: String? = null):
         val pow = ((this).toBigDecimal() / (other).toBigDecimal()).toDouble()
         pow.roundTo(numberOfZeroes)
     } else {
-        Kex.logE("Division by zero: $this / 0", tag = tag ?: "Double.divWith(): ", ArithmeticException())
+        Kex.loggE("Division by zero: $this / 0", tag = tag ?: "Double.divWith(): ", ArithmeticException())
         null
     }
 }

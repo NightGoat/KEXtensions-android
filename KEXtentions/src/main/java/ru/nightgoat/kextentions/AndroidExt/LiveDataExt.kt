@@ -2,6 +2,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import ru.nightgoat.kextentions.utils.Kex
 
 fun MutableLiveData<Boolean>.revert() {
     try {
@@ -9,7 +10,7 @@ fun MutableLiveData<Boolean>.revert() {
             value = !it
         }
     } catch (e: IllegalStateException) {
-        Log.e("revert()", "posting value in background thread!", e) // TODO: 31.05.2021  
+        Kex.loggE("posting value in background thread!", "revert()", e)
         revertAsync()
     }
 }

@@ -31,7 +31,7 @@ fun <T : Any> tryOrDefault(defaultIfCatches: T, tag: String = "tryOrDefault(): "
     return try {
         tryFunc()
     } catch (e: Exception) {
-        Kex.logE(tag = tag, message = "exception: ${e.message}", e = e)
+        Kex.loggE(tag = tag, message = "exception: ${e.message}", e = e)
         defaultIfCatches
     }
 }
@@ -40,7 +40,7 @@ fun <T : Any> tryOrNull(tag: String = "tryOrNull(): ", tryFunc: () -> T): T? {
     return try {
         tryFunc()
     } catch (e: Exception) {
-        Kex.logE(tag = tag, message = "exception: ${e.message}", e = e)
+        Kex.loggE(tag = tag, message = "exception: ${e.message}", e = e)
         null
     }
 }
