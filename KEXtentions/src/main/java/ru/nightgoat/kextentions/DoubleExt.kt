@@ -53,3 +53,15 @@ fun Double.divWith(other: Double, numberOfZeroes: Int = 3, tag: String? = null):
         null
     }
 }
+
+fun Double?.toStringWithoutScientificNotation(): String {
+    return this?.let {
+        val isItTrueDouble = it % 1.0 != 0.0
+        val newString = it.toBigDecimal().toPlainString()
+        if (isItTrueDouble) {
+            newString.trimEnd( '0' )
+        } else {
+            newString
+        }
+    }.orIfNull { "0" }
+}
