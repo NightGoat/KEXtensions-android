@@ -1,4 +1,5 @@
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
@@ -10,7 +11,7 @@ fun MutableLiveData<Boolean>.revert() {
             value = !it
         }
     } catch (e: IllegalStateException) {
-        Kex.loggE("posting value in background thread!", "revert()", e)
+        Kex.loggE("KEXception: posting value in background thread!", "revert()", e)
         revertAsync()
     }
 }
@@ -24,3 +25,7 @@ fun MutableLiveData<Boolean>.revertAsync() {
 inline fun <X, Y> LiveData<X>.mutableSwitchMap(
     crossinline transform: (X) -> LiveData<Y>
 ): MutableLiveData<Y> = this.switchMap(transform) as MutableLiveData<Y>
+
+fun <T> LiveData<T>.activate(viewLifecycleOwner: LifecycleOwner) {
+    this.observe(viewLifecycleOwner, {})
+}

@@ -40,5 +40,6 @@ android {
 
 dependencies {
 
-
+    api project(':KEXtentions')
+    testImplementation 'junit:junit:4.13.2'
 }
