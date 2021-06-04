@@ -9,6 +9,9 @@ import toPositive
 
 class IntExtTest {
 
+    private val foo = 42
+    private val negativeFoo = -42
+
     @Test
     fun orZeroTest_1() {
         val nullableInt: Int? = null
@@ -23,44 +26,37 @@ class IntExtTest {
     }
 
     @Test
-    fun toNegativeTest_1(){
-        val foo = 42
+    fun toNegativeTest_1() {
         Assert.assertEquals(-42, foo.toNegative())
     }
 
     @Test
-    fun toNegativeTest_2(){
-        val foo = -42
-        Assert.assertEquals(-42, foo.toNegative())
+    fun toNegativeTest_2() {
+        Assert.assertEquals(-42, negativeFoo.toNegative())
     }
 
     @Test
-    fun toPositiveTest_1(){
-        val foo = -42
+    fun toPositiveTest_1() {
+        Assert.assertEquals(42, negativeFoo.toPositive())
+    }
+
+    @Test
+    fun toPositiveTest_2() {
         Assert.assertEquals(42, foo.toPositive())
     }
 
     @Test
-    fun toPositiveTest_2(){
-        val foo = 42
-        Assert.assertEquals(42, foo.toPositive())
-    }
-
-    @Test
-    fun reverseTest_1(){
-        val foo = 42
+    fun reverseTest_1() {
         Assert.assertEquals(-42, foo.reverse())
     }
 
     @Test
-    fun reverseTest_2(){
-        val foo = 42
+    fun reverseTest_2() {
         Assert.assertEquals(-42, foo.reverse())
     }
 
     @Test
-    fun reverseTest_3(){
-        val foo = 42
+    fun reverseTest_3() {
         Assert.assertEquals(42, foo.reverse().reverse())
     }
 }
