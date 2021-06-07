@@ -2,11 +2,18 @@ package ru.nightgoat
 
 import addIf
 import distinctAndFilter
+import findInInstanceOf
+import firstOrElse
 import indexOfOrNull
+import mapNotNullOrEmpty
+import mapOrEmpty
 import orEmptyMutable
 import orEmptyMutableMap
+import orZero
 import org.junit.Assert
 import org.junit.Test
+import sizeInDouble
+import sizeInString
 import sumByDoubleSafe
 
 class CollectionsExtTest {
@@ -124,5 +131,82 @@ class CollectionsExtTest {
     fun sumByDoubleSafe_test_1() {
         val list = listOf(0.1, 0.2)
         Assert.assertEquals(0.3, list.sumByDoubleSafe { it }, 0.0)
+    }
+
+    @Test
+    fun firstOrElse_test_1() {
+        val empty = emptyList<Int>()
+        Assert.assertEquals(0, empty.firstOrElse { 0 })
+    }
+
+    @Test
+    fun firstOrElse_test_2() {
+        val notEmpty = listOf<Int>(1, 2)
+        Assert.assertEquals(1, notEmpty.firstOrElse { 0 })
+    }
+
+    @Test
+    fun sizeInDouble_test_1() {
+        val list = listOf(1, 2)
+        Assert.assertEquals(2.0, list.sizeInDouble(), 0.0)
+    }
+
+    @Test
+    fun sizeInString_test_1() {
+        val list = listOf(1, 2)
+        Assert.assertEquals("2", list.sizeInString())
+    }
+
+    @Test
+    fun findInInstanceOf_test_1() {
+        val list: List<Number> = listOf(1, 10, 2.0, 3L)
+        val founded = list.findInInstanceOf<Int> { it < 10 }
+        Assert.assertEquals(1, founded)
+    }
+
+    @Test
+    fun findInInstanceOf_test_2() {
+        val list: List<Number> = listOf(1, 10, 3L)
+        val founded = list.findInInstanceOf<Double> { it < 10 }
+        Assert.assertNull(founded)
+    }
+
+    @Test
+    fun mapNotNullOrEmpty_test_1() {
+        val list: List<Int?>? = null
+        Assert.assertEquals(emptyList<Int>(), list.mapNotNullOrEmpty {
+            it?.let {
+                it * 2
+            }
+        })
+    }
+
+    @Test
+    fun mapNotNullOrEmpty_test_2() {
+        val list: List<Int?> = listOf(0, 1, 2, null)
+        Assert.assertEquals(listOf(0, 2, 4), list.mapNotNullOrEmpty {
+            it?.let {
+                it * 2
+            }
+        })
+    }
+    @Test
+    fun mapOrEmpty_test_1() {
+        val list: List<Int?>? = null
+        Assert.assertEquals(emptyList<Int>(), list.mapOrEmpty {
+            it?.let {
+                it * 2
+            }
+        })
+    }
+
+    @Test
+    fun mapOrEmpty_test_2() {
+        val list: List<Int?> = listOf(0, 1, 2, null)
+        Assert.assertEquals(listOf(0, 2, 4, null), list.mapOrEmpty {
+            it?.let {
+                it * 2
+            }
+        })
     }
 }
