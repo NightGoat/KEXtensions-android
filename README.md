@@ -23,7 +23,7 @@ fun foo(bar: Int) {
 ```
 
 ## Logging
-Some extentions does require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is ordinary Android Log.e tool, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (ofcource you need to have Timber in your graddle dependencies):
+Some extentions does require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is ordinary Android Log.e tool, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (ofcourse you need to have Timber in your graddle dependencies):
 ```
 Kex.setTimber()
 ```
