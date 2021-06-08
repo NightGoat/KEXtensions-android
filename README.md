@@ -31,7 +31,7 @@ If you want you can have your custom logger, you need to use ILogger interface f
 ```
 object MyCustomLogger: ILogger {
     override fun loggE(message: String, tag: String?, e: Throwable?) {
-        \\Put your logging code here
+        //Put your logging code here
     }
 }
 
