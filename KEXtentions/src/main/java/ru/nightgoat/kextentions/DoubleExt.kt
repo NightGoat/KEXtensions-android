@@ -1,4 +1,5 @@
-import android.util.Log
+import ru.nightgoat.kextentions.utils.Kex
+import java.lang.ArithmeticException
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -43,12 +44,24 @@ fun Double.timesWith(other: Double, numberOfZeroes: Int = 3): Double {
     return pow.roundTo(numberOfZeroes)
 }
 
-fun Double.divWith(other: Double, numberOfZeroes: Int = 3): Double? {
+fun Double.divWith(other: Double, numberOfZeroes: Int = 3, tag: String? = null): Double? {
     return if (other != 0.0) {
         val pow = ((this).toBigDecimal() / (other).toBigDecimal()).toDouble()
         pow.roundTo(numberOfZeroes)
     } else {
-        Log.e("Double.divWith()", "Division by zero: $this / $other")
+        Kex.loggE("Division by zero: $this / 0", tag = tag ?: "Double.divWith(): ", ArithmeticException())
         null
     }
+}
+
+fun Double?.toStringWithoutScientificNotation(): String {
+    return this?.let {
+        val isItTrueDouble = it % 1.0 != 0.0
+        val newString = it.toBigDecimal().toPlainString()
+        if (isItTrueDouble) {
+            newString.trimEnd( '0' )
+        } else {
+            newString
+        }
+    }.orIfNull { "0" }
 }

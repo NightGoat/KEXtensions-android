@@ -17,3 +17,5 @@ fun Boolean.doIfFalse(doFun: () -> Unit) {
         doFun.invoke()
     }
 }
+
+fun Boolean.toBinary() = 1.takeIf { this }.orZero()

@@ -1,4 +1,4 @@
-import android.util.Log
+import ru.nightgoat.kextentions.utils.Kex
 
 /**
  * Helper nullability function
@@ -27,7 +27,7 @@ fun <T, V> T?.orLet(variable: V?, letBlock: (V) -> T) = this ?: variable?.let(le
  */
 fun <T : Any> T?.logIfNull(message: String, tag: String = "logIfNull"): T? {
     if (this == null) {
-        Log.e(tag, message)
+        Kex.loggE(tag, message)
     }
     return this
 }
@@ -35,10 +35,16 @@ fun <T : Any> T?.logIfNull(message: String, tag: String = "logIfNull"): T? {
 /**
  * Extention that simplifies null checking
  * example:
- * val foos: List<String?> = listOf("123", null)
- * val isFooExist = foos.find { it == "123" }.exists()
- * if (isFooExists) {
- *     doStuff()
+ * class Box {
+ *    val findProduct(): Product
+ * }
+ *
+ * class Foo {
+ *     val box = Repo.getBox()
+ *     val product = box.findProduct()
+ *     if (product.exists()) {
+ *         doStuff()
+ *     }
  * }
  * */
 fun <T> T?.exists() = this != null

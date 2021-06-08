@@ -8,8 +8,8 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.text.format.Formatter
-import android.util.Log
 import android.util.TypedValue
+import ru.nightgoat.kextentions.utils.Kex
 import kotlin.system.exitProcess
 
 @Suppress("DEPRECATION")
@@ -44,31 +44,36 @@ fun Context.getNotGrantedPermissions(neededPermissions: Collection<String>): Lis
 fun Context.restartApp() {
     val packageManager = packageManager
     val intent = packageManager.getLaunchIntentForPackage(packageName)
-    val componentName = intent!!.component
-    val mainIntent = Intent.makeRestartActivityTask(componentName)
-    this.startActivity(mainIntent)
-    exitProcess(0)
-}
-
-fun Context.openAnotherApp(packageName: String) {
-    val launchIntent = packageManager.getLaunchIntentForPackage(packageName.trim())
-    if (launchIntent != null) {
-        try {
-            startActivity(launchIntent)
-        } catch (e: Exception) {
-            Log.e("openAnotherApp", "exception: ${e.message}", e)
-        }
+    intent?.component?.let { componentName ->
+        val mainIntent = Intent.makeRestartActivityTask(componentName)
+        this.startActivity(mainIntent)
+        exitProcess(0)
     }
 }
 
-fun Context.getApplicationName(packageName: String = this.packageName): String {
+fun Context.openAnotherApp(packageName: String, tag: String = "openAnotherApp()") {
+    packageManager.getLaunchIntentForPackage(packageName.trim())?.let { launchIntent ->
+        try {
+            startActivity(launchIntent)
+        } catch (e: Exception) {
+            Kex.loggE(tag, "exception: ${e.message}", e)
+        }
+    }.logIfNull("launch intent null!", tag)
+}
+
+fun Context.getApplicationName(packageName: String = this.packageName, tag: String = "getApplicationName(): "): String {
     val pm = applicationContext.packageManager
     val applicationInfo: ApplicationInfo? = try {
         pm.getApplicationInfo(packageName, 0)
     } catch (e: PackageManager.NameNotFoundException) {
+        Kex.loggE("package manager null", tag, e)
         null
     }
-    return (if (applicationInfo != null) pm.getApplicationLabel(applicationInfo) else "(unknown)") as String
+    return applicationInfo?.let {
+        pm.getApplicationLabel(applicationInfo) as String
+    }.orIfNull {
+        "(unknown)"
+    }
 }
 
 fun Context.getAppVersion(packageName: String, withHash: Boolean = false): String? {
