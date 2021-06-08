@@ -35,10 +35,15 @@ android {
             sourceCompatibility 1.8
             targetCompatibility 1.8
         }
+        testOptions {
+            unitTests.returnDefaultValues = true
+        }
     }
 }
 
 dependencies {
 
-
+    api project(':KEXtentions')
+    testImplementation "org.mockito:mockito-core:3.7.7"
+    testImplementation 'junit:junit:4.13.2'
 }

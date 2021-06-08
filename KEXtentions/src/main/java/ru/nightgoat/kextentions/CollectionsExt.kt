@@ -24,8 +24,12 @@ fun <T> MutableCollection<T>.addIf(predicate: Boolean, whatToAdd: () -> T) {
     if (predicate) this.add(whatToAdd())
 }
 
+fun <T> MutableCollection<T>.addIf(whatToAdd: T, predicate: (MutableCollection<T>) -> Boolean) {
+    if (predicate.invoke(this)) this.add(whatToAdd)
+}
+
 /**
- * Distincts and filter Iterable in one cycle. Faster that using
+ * Distincts and filters Iterable in one cycle. Faster that using
  * list.distinctBy {  }.filter {  }
  */
 inline fun <T, K> Iterable<T>.distinctAndFilter(

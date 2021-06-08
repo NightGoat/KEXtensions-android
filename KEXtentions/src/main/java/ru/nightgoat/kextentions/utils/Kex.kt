@@ -7,6 +7,7 @@ import timber.log.Timber
 
 object Kex {
     var logger: ILogger = AndroidLogger
+    var isStackTraceOn: Boolean = true
 
     fun setCustomLogger(newLogger: ILogger): Kex {
         logger = newLogger
@@ -19,7 +20,18 @@ object Kex {
         return this
     }
 
+    fun turnOffStackTrace(): Kex {
+        isStackTraceOn = false
+        return this
+    }
+
+    fun turnOnStackTrace(): Kex {
+        isStackTraceOn = true
+        return this
+    }
+
     fun loggE(message: String, tag: String? = null, e: Throwable? = null) {
-        logger.loggE(message, tag, e)
+        val throwable = e.takeIf { isStackTraceOn }
+        logger.loggE(message, tag, throwable)
     }
 }
