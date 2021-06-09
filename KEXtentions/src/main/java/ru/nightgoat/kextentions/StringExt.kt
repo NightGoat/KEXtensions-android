@@ -1,3 +1,4 @@
+import android.util.Patterns
 import java.util.*
 
 fun String.orIfEmpty(input: () -> String): String {
@@ -66,3 +67,7 @@ inline fun <reified T : Enum<*>> String.enumValueOrNull(): T? =
  * */
 inline fun <reified T : Enum<*>> String.enumValueOrDefault(default: T): T =
     T::class.java.enumConstants.firstOrNull { it.name == this } ?: default
+
+private fun String.isEmail(): Boolean {
+    return Patterns.EMAIL_ADDRESS.toRegex().matches(this)
+}
