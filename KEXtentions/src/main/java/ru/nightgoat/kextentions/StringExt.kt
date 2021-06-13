@@ -1,5 +1,6 @@
 import android.util.Patterns
 import java.util.*
+import java.util.regex.Pattern
 
 fun String.orIfEmpty(input: () -> String): String {
     return if (this.isEmpty()) input.invoke()
@@ -68,6 +69,22 @@ inline fun <reified T : Enum<*>> String.enumValueOrNull(): T? =
 inline fun <reified T : Enum<*>> String.enumValueOrDefault(default: T): T =
     T::class.java.enumConstants.firstOrNull { it.name == this } ?: default
 
-private fun String.isEmail(): Boolean {
-    return Patterns.EMAIL_ADDRESS.toRegex().matches(this)
+fun String.isEmail(): Boolean {
+    return isMatchesRegex(Patterns.EMAIL_ADDRESS)
+}
+
+fun String.isPhone(): Boolean {
+    return isMatchesRegex(Patterns.PHONE)
+}
+
+fun String.isIPAddress(): Boolean {
+    return isMatchesRegex(Patterns.IP_ADDRESS)
+}
+
+fun String.isMatchesRegex(regex: String): Boolean {
+    return regex.toRegex().matches(this)
+}
+
+fun String.isMatchesRegex(regex: Pattern): Boolean {
+    return regex.toRegex().matches(this)
 }
