@@ -70,15 +70,37 @@ inline fun <reified T : Enum<*>> String.enumValueOrDefault(default: T): T =
     T::class.java.enumConstants.firstOrNull { it.name == this } ?: default
 
 fun String.isEmail(): Boolean {
-    return isMatchesRegex(Patterns.EMAIL_ADDRESS)
+    val pattern = Patterns.EMAIL_ADDRESS ?: Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
+    return isMatchesRegex(pattern)
 }
 
 fun String.isPhone(): Boolean {
-    return isMatchesRegex(Patterns.PHONE)
+    val pattern = Patterns.PHONE ?: Pattern.compile(
+        "(\\+[0-9]+[\\- \\.]*)?"
+                + "(\\([0-9]+\\)[\\- \\.]*)?"
+                + "([0-9][0-9\\- \\.]+[0-9])"
+    )
+
+    return isMatchesRegex(pattern)
 }
 
 fun String.isIPAddress(): Boolean {
-    return isMatchesRegex(Patterns.IP_ADDRESS)
+    val ipAddressPatternString =
+        ("((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4]"
+                + "[0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]"
+                + "[0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}"
+                + "|[1-9][0-9]|[0-9]))")
+    val ipAddressPattern = Pattern.compile(ipAddressPatternString)
+    val pattern = Patterns.IP_ADDRESS ?: ipAddressPattern
+    return isMatchesRegex(pattern)
 }
 
 fun String.isMatchesRegex(regex: String): Boolean {
@@ -87,4 +109,8 @@ fun String.isMatchesRegex(regex: String): Boolean {
 
 fun String.isMatchesRegex(regex: Pattern): Boolean {
     return regex.toRegex().matches(this)
+}
+
+fun String.isMatchesRegex(regex: Regex): Boolean {
+    return regex.matches(this)
 }
