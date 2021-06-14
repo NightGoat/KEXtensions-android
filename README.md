@@ -6,8 +6,8 @@ Kotlin and Android extensions library.
 As Android developer, i use in my work Kotlin as main coding language, and Kotlin has a big killer feature - [extensions](https://kotlinlang.org/docs/extensions.html). Some extensions, such as [orIfNull](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/OtherExt.kt) or [doOnDefault](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/HighOrderFunctions.kt) I have been using many many times in alot of projects, and get kinda tired of copying this code in all projects, so this library was born.
 
 ## Examples:
-Using this library does not requires knowledge or skill, this extensions will work as part of a kotlin language. For example:
-You have liveData, and you want to get value from it, but your method requires non null values, you can use extention from [DoubleExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/DoubleExt.kt) orZero():
+Using this library does not require knowledge or skill, this extensions will work as part of Kotlin language. For example:
+You have liveData, and you want to get value from it, but your method requires non null values, you can use extention from [IntExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/IntExt.kt) orZero():
 ```
 val number = liveData {
 	emit(2+2)
@@ -23,7 +23,7 @@ fun foo(bar: Int) {
 ```
 
 ## Logging
-Some extensions does require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is ordinary Android Log.e tool, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (ofcourse you need to have Timber in your graddle dependencies):
+Some extensions do require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is ordinary Android Log.e tool, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (of course you need to have Timber in your graddle dependencies):
 ```
 Kex.setTimber()
 ```
