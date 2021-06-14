@@ -7,7 +7,7 @@ As Android developer, i use in my work Kotlin as main coding language, and Kotli
 
 ## Examples:
 Using this library does not require knowledge or skill, this extensions will work as part of Kotlin language. For example:
-You have liveData, and you want to get value from it, but your method requires non null values, you can use extention from [IntExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/IntExt.kt) orZero():
+You have liveData, and you want to get value from it, but your method requires non null values, you can use extension from [IntExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/IntExt.kt) orZero():
 ```
 val number = liveData {
 	emit(2+2)
