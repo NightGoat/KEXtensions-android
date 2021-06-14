@@ -1,22 +1,8 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import enumValueOrDefault
-import enumValueOrNull
-import isWhiteSpace
-import normalize
-import orIfEmpty
-import orZero
 import org.junit.Assert
 import org.junit.Test
-import takeIfEmpty
-import takeIfNotEmpty
-import toDoubleOrDefault
-import toDoubleOrZero
-import toIntOrDefault
-import toIntOrZero
-import toLongOrDefault
-import toLongOrZero
-import trimZeros
+import ru.nightgoat.kextensions.*
 
 class StringExtTest {
 
@@ -178,5 +164,35 @@ class StringExtTest {
     @Test
     fun enumValueOrDefault_test_2() {
         Assert.assertEquals(Foo.FAR, "BAZ".enumValueOrDefault(Foo.FAR))
+    }
+
+    @Test
+    fun isEmail_test_1() {
+        Assert.assertTrue("test@test.com".isEmail())
+    }
+
+    @Test
+    fun isEmail_test_2() {
+        Assert.assertFalse("test.com".isEmail())
+    }
+
+    @Test
+    fun isPhone_test_1() {
+        Assert.assertTrue("+79211234567".isPhone())
+    }
+
+    @Test
+    fun isPhone_test_2() {
+        Assert.assertFalse("ABC".isPhone())
+    }
+
+    @Test
+    fun isIPAddress_test_1() {
+        Assert.assertTrue("192.168.0.1".isIPAddress())
+    }
+
+    @Test
+    fun isIPAddress_test_2() {
+        Assert.assertFalse("Hello world!".isIPAddress())
     }
 }

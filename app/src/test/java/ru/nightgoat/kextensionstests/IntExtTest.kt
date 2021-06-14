@@ -1,11 +1,11 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import orZero
 import org.junit.Assert
 import org.junit.Test
-import reverse
-import toNegative
-import toPositive
+import ru.nightgoat.kextensions.orZero
+import ru.nightgoat.kextensions.reverse
+import ru.nightgoat.kextensions.toNegative
+import ru.nightgoat.kextensions.toPositive
 
 class IntExtTest {
 

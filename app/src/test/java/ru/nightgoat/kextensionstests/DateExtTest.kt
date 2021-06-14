@@ -1,10 +1,10 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import minus
-import orNow
 import org.junit.Assert
 import org.junit.Test
-import plus
+import ru.nightgoat.kextensions.minus
+import ru.nightgoat.kextensions.orNow
+import ru.nightgoat.kextensions.plus
 import java.util.*
 
 class DateExtTest {

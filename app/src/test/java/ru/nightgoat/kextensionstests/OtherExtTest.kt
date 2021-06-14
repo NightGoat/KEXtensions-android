@@ -1,10 +1,10 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import exists
-import orIfNull
-import orLet
 import org.junit.Assert
 import org.junit.Test
+import ru.nightgoat.kextensions.exists
+import ru.nightgoat.kextensions.orIfNull
+import ru.nightgoat.kextensions.orLet
 
 class OtherExtTest {
 

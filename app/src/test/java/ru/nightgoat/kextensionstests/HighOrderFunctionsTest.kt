@@ -1,12 +1,11 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
 import org.junit.Assert
 import org.junit.Test
-import tryOrDefault
-import tryOrEmpty
-import tryOrNow
-import tryOrNull
-import java.lang.NullPointerException
+import ru.nightgoat.kextensions.tryOrDefault
+import ru.nightgoat.kextensions.tryOrEmpty
+import ru.nightgoat.kextensions.tryOrNow
+import ru.nightgoat.kextensions.tryOrNull
 import java.util.*
 
 class HighOrderFunctionsTest {

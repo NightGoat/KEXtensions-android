@@ -1,20 +1,8 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import addIf
-import distinctAndFilter
-import findInInstanceOf
-import firstOrElse
-import indexOfOrNull
-import mapNotNullOrEmpty
-import mapOrEmpty
-import orEmptyMutable
-import orEmptyMutableMap
-import orZero
 import org.junit.Assert
 import org.junit.Test
-import sizeInDouble
-import sizeInString
-import sumByDoubleSafe
+import ru.nightgoat.kextensions.*
 
 class CollectionsExtTest {
 

@@ -1,14 +1,8 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import doIfFalse
-import doIfTrue
-import orFalse
-import orTrue
 import org.junit.Assert
 import org.junit.Test
-import takeIfFalse
-import takeIfTrue
-import toBinary
+import ru.nightgoat.kextensions.*
 
 class BooleanExtTest {
 
