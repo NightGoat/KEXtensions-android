@@ -1,18 +1,8 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import android.util.Log
-import divWith
-import dropZeros
-import minWith
-import orZero
 import org.junit.Assert
 import org.junit.Test
-import roundTo
-import sumWith
-import org.mockito.Mockito.*
-import ru.nightgoat.kextentions.utils.Kex
-import toStringWithoutScientificNotation
-import java.lang.ArithmeticException
+import ru.nightgoat.kextensions.*
 
 class DoubleExtTest {
 

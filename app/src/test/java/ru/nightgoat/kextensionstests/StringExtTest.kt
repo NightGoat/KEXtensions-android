@@ -1,25 +1,8 @@
-package ru.nightgoat
+package ru.nightgoat.kextensionstests
 
-import enumValueOrDefault
-import enumValueOrNull
-import isEmail
-import isIPAddress
-import isPhone
-import isWhiteSpace
-import normalize
-import orIfEmpty
-import orZero
 import org.junit.Assert
 import org.junit.Test
-import takeIfEmpty
-import takeIfNotEmpty
-import toDoubleOrDefault
-import toDoubleOrZero
-import toIntOrDefault
-import toIntOrZero
-import toLongOrDefault
-import toLongOrZero
-import trimZeros
+import ru.nightgoat.kextensions.*
 
 class StringExtTest {
 
