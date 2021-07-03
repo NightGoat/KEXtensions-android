@@ -8,16 +8,18 @@ fun Boolean.takeIfTrue() = this.takeIf { it }
 
 fun Boolean.takeIfFalse() = this.takeIf { !it }
 
-fun Boolean.doIfTrue(doFun: () -> Unit) {
+fun Boolean.doIfTrue(doFun: () -> Unit): Boolean {
     if (this) {
         doFun.invoke()
     }
+    return this
 }
 
-fun Boolean.doIfFalse(doFun: () -> Unit) {
+fun Boolean.doIfFalse(doFun: () -> Unit): Boolean {
     if (!this) {
         doFun.invoke()
     }
+    return this
 }
 
 fun Boolean.toBinary() = 1.takeIf { this }.orZero()
