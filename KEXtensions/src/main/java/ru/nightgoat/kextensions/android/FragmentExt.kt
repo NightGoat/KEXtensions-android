@@ -1,5 +1,6 @@
 package ru.nightgoat.kextensions.android
 
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -37,4 +38,20 @@ inline fun <reified T> DialogFragment.argumentOrDefault(
     defaultValue: T
 ): Lazy<T> = unsafeLazy {
     arguments?.get(argumentKey) as? T ?: defaultValue
+}
+
+fun Fragment.showShortToast(text: String) {
+    Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showShortToast(text: () -> String) {
+    Toast.makeText(requireContext(), text.invoke(), Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showLongToast(text: String) {
+    Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+}
+
+fun Fragment.showLongToast(text: () -> String) {
+    Toast.makeText(requireContext(), text.invoke(), Toast.LENGTH_LONG).show()
 }
