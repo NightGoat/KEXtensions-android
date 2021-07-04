@@ -197,4 +197,24 @@ class CollectionsExtTest {
             }
         })
     }
+
+    @Test
+    fun mapAndFind_test_1() {
+        data class Shape(val edges: Int, val angle: Int = 0, val color: Int)
+
+        val circle = Shape(edges = 0, color = 1)
+        val square = Shape(edges = 4, color = 2)
+        val rhombus = Shape(edges = 4, angle = 45, color = 3)
+        val triangle = Shape(edges = 3, color = 4)
+        val shapes = listOf(circle, square, rhombus, triangle)
+        val yellowSquareSequence = shapes.mapAndFind(
+            map = {
+                it.copy(color = 3)
+            },
+            find = {
+                it.edges == 4
+            }
+        )
+        Assert.assertEquals(yellowSquareSequence, Shape(edges = 4, angle = 0, color = 3))
+    }
 }

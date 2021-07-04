@@ -87,3 +87,11 @@ inline fun <T, K> List<T>?.mapNotNullOrEmpty(transform: (T) -> K?): List<K> =
 inline fun <T, K> List<T>?.mapOrEmpty(transform: (T) -> K): List<K> = this.orEmpty().map {
     transform.invoke(it)
 }
+
+/**
+ * Just and example of how to work with Sequence
+ * @see <a href="http://google.com">https://nuancesprog.ru/p/4603/</a>
+ * */
+fun <T, R> List<T>.mapAndFind(map: (T) -> R, find: (R) -> Boolean) = this.asSequence()
+    .map(map)
+    .find(find)
