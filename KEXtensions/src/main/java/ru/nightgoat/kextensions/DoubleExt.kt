@@ -1,6 +1,7 @@
 package ru.nightgoat.kextensions
 
 import ru.nightgoat.kextensions.utils.Kex
+import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -70,3 +71,11 @@ fun Double?.toStringWithoutScientificNotation(): String {
         }
     }.orIfNull { "0" }
 }
+
+fun Double.toNegative() = -abs(this)
+fun Double.toPositive() = abs(this)
+
+fun Double.reverse() = this.unaryMinus()
+
+fun Double.takeIfZero() = this.takeIf { it == 0.0 }
+fun Double.takeIfNotZero() = this.takeIf { it != 0.0 }

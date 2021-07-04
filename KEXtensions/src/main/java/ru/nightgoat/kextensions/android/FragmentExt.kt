@@ -12,12 +12,16 @@ fun <T : ViewModel> Fragment.provideViewModel(clazz: Class<T>): T {
     return ViewModelProvider(this).get(clazz)
 }
 
-fun <T> Fragment.wakeUpLiveData(liveData: LiveData<T>) {
-    liveData.activate(viewLifecycleOwner)
+fun <T> Fragment.wakeUpLiveData(vararg liveData: LiveData<T>) {
+    liveData.forEach {
+        it.activate(viewLifecycleOwner)
+    }
 }
 
 fun <T> Fragment.wakeUpLiveData(listOfLD: List<LiveData<T>>) {
-    listOfLD.forEach(::wakeUpLiveData)
+    listOfLD.forEach {
+        it.activate(viewLifecycleOwner)
+    }
 }
 
 inline fun <reified T> Fragment.argument(argumentKey: String): Lazy<T?> = unsafeLazy {
