@@ -30,3 +30,12 @@ inline fun <X, Y> LiveData<X>.mutableSwitchMap(
 fun <T> LiveData<T>.activate(viewLifecycleOwner: LifecycleOwner) {
     this.observe(viewLifecycleOwner, {})
 }
+
+fun <T : Any> MutableLiveData<T>.tryToSetValue(newValue: T) {
+    try {
+        value = newValue
+    } catch (e: IllegalStateException) {
+        Kex.loggE("KEXception: posting value in background thread!", "tryToSetValue()", e)
+        postValue(value)
+    }
+}
