@@ -1,5 +1,7 @@
 package ru.nightgoat.kextensions
 
+import ru.nightgoat.kextensions.utils.Kex
+
 fun <T> List<T>?.orEmptyMutable(): MutableList<T> = this?.toMutableList() ?: mutableListOf()
 
 fun <T> Set<T>?.orEmptyMutable(): MutableSet<T> = this?.toMutableSet() ?: mutableSetOf()
@@ -64,10 +66,16 @@ inline fun <reified T> Collection<T>.firstOrElse(elseFun: () -> T): T {
     return this.firstOrNull().orIfNull(elseFun)
 }
 
+/**
+ * Returns size in instance of Double
+ */
 fun <T> List<T>.sizeInDouble(): Double {
     return this.size.toDouble()
 }
 
+/**
+ * Returns size in instance of String
+ */
 fun <T> List<T>.sizeInString(): String {
     return this.size.toString()
 }
@@ -95,3 +103,74 @@ inline fun <T, K> List<T>?.mapOrEmpty(transform: (T) -> K): List<K> = this.orEmp
 fun <T, R> List<T>.mapAndFind(map: (T) -> R, find: (R) -> Boolean) = this.asSequence()
     .map(map)
     .find(find)
+
+/**
+ * Turns object to list of this one object or empty if object is null.
+ */
+fun <T : Any> T?.toList() = this?.run { listOf(this) }.orEmpty()
+
+/**
+ * Swaps elements by entered positions and returns list. Returns not changed list, if second index
+ * less or equals than first. Swaps first and last item by default.
+ */
+fun <T : Any> MutableList<T>.swap(
+    firstIndex: Int = 0,
+    secondIndex: Int = this.lastIndex
+): MutableList<T> {
+    val list = this.toMutableList()
+    if (secondIndex > firstIndex) {
+        val first = list.getOrNull(firstIndex)
+        val last = list.getOrNull(secondIndex)
+        first?.let {
+            last?.let {
+                list.removeAt(firstIndex)
+                list.removeAt(secondIndex - 1)
+                list.add(firstIndex, last)
+                list.add(secondIndex, first)
+            } ?: Kex.loggE("swap(): item by second index($secondIndex) not found!")
+        } ?: Kex.loggE("swap(): item by first index($firstIndex) not found!")
+    } else {
+        Kex.loggE("swap(): second index($secondIndex) can not be more than first index($firstIndex)!")
+    }
+    return list
+}
+
+/**
+ * Swaps first and last item.
+ */
+fun <T : Any> MutableList<T>.swapFirstAndLastElement(): MutableList<T> {
+    return this.swap()
+}
+
+/**
+ * Finds object in list and moves to entered position. Moves to first position by default.
+ */
+fun <T : Any> MutableList<T>.moveToPosition(
+    position: Int = 0,
+    findItemBy: (T) -> Boolean
+): MutableList<T> {
+    val list = this.toMutableList()
+    if (position in 0..list.lastIndex) {
+        list.find { findItemBy(it) }?.let { found ->
+            list.remove(found)
+            list.add(position, found)
+        }
+    } else {
+        Kex.loggE("moveToPosition(): position($position) must be in bounds of a list(in 0..${list.lastIndex}! ")
+    }
+    return list
+}
+
+/**
+ * Finds object in list and moves to first position
+ */
+fun <T : Any> MutableList<T>.moveToFirstPosition(findItemBy: (T) -> Boolean): MutableList<T> {
+    return moveToPosition(findItemBy = findItemBy)
+}
+
+/**
+ * Finds object in list and moves to last position
+ */
+fun <T : Any> MutableList<T>.moveToLastPosition(findItemBy: (T) -> Boolean): MutableList<T> {
+    return moveToPosition(position = this.lastIndex, findItemBy = findItemBy)
+}

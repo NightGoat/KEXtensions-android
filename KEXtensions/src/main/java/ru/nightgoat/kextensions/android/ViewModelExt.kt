@@ -2,8 +2,7 @@ package ru.nightgoat.kextensions.android
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
-import ru.nightgoat.kextensions.getNameAndMessage
-import ru.nightgoat.kextensions.utils.Kex
+import ru.nightgoat.kextensions.log
 
 fun ViewModel.launchUITryCatch(
     start: CoroutineStart = CoroutineStart.DEFAULT,
@@ -13,7 +12,7 @@ fun ViewModel.launchUITryCatch(
     try {
         viewModelScope.launch(viewModelScope.coroutineContext, start, tryBlock)
     } catch (e: Throwable) {
-        Kex.loggE(message = e.getNameAndMessage(), "launchUITryCatch", e)
+        e.log(tag = "launchUITryCatch(): ")
         catchBlock?.invoke(e)
     }
 }
@@ -27,7 +26,7 @@ fun ViewModel.launchAsyncTryCatch(
     try {
         launchAsync(dispatcher, start, tryBlock)
     } catch (e: Throwable) {
-        Kex.loggE(message = e.getNameAndMessage(), "launchAsyncTryCatch", e)
+        e.log(tag = "launchAsyncTryCatch(): ")
         catchBlock?.invoke(e)
     }
 }
@@ -53,7 +52,7 @@ fun <T> ViewModel.asyncTryCatchLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        Kex.loggE(message = e.getNameAndMessage(), "asyncTryCatchLiveData", e)
+        e.log(tag = "asyncTryCatchLiveData(): ")
         catchBlock?.invoke(e)
     }
 }
@@ -66,7 +65,7 @@ fun <T> ViewModel.asyncTryCatchMutableLiveData(
     try {
         emit(tryBlock())
     } catch (e: Throwable) {
-        Kex.loggE(message = e.getNameAndMessage(), "asyncTryCatchLiveData", e)
+        e.log(tag = "asyncTryCatchLiveData(): ")
         catchBlock?.invoke(e)
     }
 } as MutableLiveData<T>

@@ -18,12 +18,6 @@ fun <T> Fragment.wakeUpLiveData(vararg liveData: LiveData<T>) {
     }
 }
 
-fun <T> Fragment.wakeUpLiveData(listOfLD: List<LiveData<T>>) {
-    listOfLD.forEach {
-        it.activate(viewLifecycleOwner)
-    }
-}
-
 inline fun <reified T> Fragment.argument(argumentKey: String): Lazy<T?> = unsafeLazy {
     arguments?.get(argumentKey) as? T
 }
@@ -44,18 +38,18 @@ inline fun <reified T> DialogFragment.argumentOrDefault(
     arguments?.get(argumentKey) as? T ?: defaultValue
 }
 
-fun Fragment.showShortToast(text: String) {
+fun Fragment.shortToast(text: String) {
     Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.showShortToast(text: () -> String) {
+fun Fragment.shortToast(text: () -> String) {
     Toast.makeText(requireContext(), text.invoke(), Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.showLongToast(text: String) {
+fun Fragment.longToast(text: String) {
     Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
 }
 
-fun Fragment.showLongToast(text: () -> String) {
+fun Fragment.longToast(text: () -> String) {
     Toast.makeText(requireContext(), text.invoke(), Toast.LENGTH_LONG).show()
 }

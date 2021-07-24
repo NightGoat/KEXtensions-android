@@ -5,9 +5,14 @@ import ru.nightgoat.kextensions.utils.logging.ILogger
 import ru.nightgoat.kextensions.utils.logging.TimberLogger
 import timber.log.Timber
 
+/**
+ * Main utils class
+ * @author NightGoat
+ * */
 object Kex {
-    var logger: ILogger = AndroidLogger
-    var isStackTraceOn: Boolean = true
+    private var logger: ILogger = AndroidLogger
+    private var isLoggerOn = true
+    private var isStackTraceOn: Boolean = true
 
     fun setCustomLogger(newLogger: ILogger): Kex {
         logger = newLogger
@@ -30,8 +35,19 @@ object Kex {
         return this
     }
 
+    /**
+     * Turns off this noisy logger.
+     * "Will you shut up and listen to me? Shut down all garbage mashers on the Detention Level, will you? Do you copy?"
+     * */
+    fun turnOffLogger(): Kex {
+        isLoggerOn = false
+        return this
+    }
+
     fun loggE(message: String, tag: String? = null, e: Throwable? = null) {
-        val throwable = e.takeIf { isStackTraceOn }
-        logger.loggE(message, tag, throwable)
+        if (isLoggerOn) {
+            val throwable = e.takeIf { isStackTraceOn }
+            logger.loggE(message, tag, throwable)
+        }
     }
 }
