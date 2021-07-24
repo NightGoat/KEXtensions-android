@@ -2,27 +2,26 @@ package ru.nightgoat.kextensions
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.nightgoat.kextensions.utils.Kex
 import java.util.*
 
 /**
  * Shorter version of coroutine context switching to Default dispatcher
  */
-suspend fun <T> doOnDefault(doFun: () -> T) = withContext(Dispatchers.Default) {
+suspend fun <T> doOnDefault(doFun: suspend () -> T) = withContext(Dispatchers.Default) {
     doFun()
 }
 
 /**
  * Shorter version of coroutine context switching to Main dispatcher
  */
-suspend fun <T> doOnMain(doFun: () -> T) = withContext(Dispatchers.Main) {
+suspend fun <T> doOnMain(doFun: suspend () -> T) = withContext(Dispatchers.Main) {
     doFun()
 }
 
 /**
  * Shorter version of coroutine context switching to IO dispatcher
  */
-suspend fun <T> doOnIO(doFun: () -> T) = withContext(Dispatchers.IO) {
+suspend fun <T> doOnIO(doFun: suspend () -> T) = withContext(Dispatchers.IO) {
     doFun()
 }
 
@@ -30,23 +29,23 @@ suspend fun <T> doOnIO(doFun: () -> T) = withContext(Dispatchers.IO) {
  * try default fun realisation
  */
 fun <T : Any> tryOrDefault(
-    defaultIfCatches: T,
+    defaultValue: T,
     tag: String = "tryOrDefault(): ",
-    tryFunc: () -> T
+    tryFunc: () -> T?
 ): T {
     return try {
-        tryFunc()
+        tryFunc() ?: defaultValue
     } catch (e: Exception) {
-        Kex.loggE(tag = tag, message = e.getNameAndMessage(), e = e)
-        defaultIfCatches
+        e.log(tag = tag)
+        defaultValue
     }
 }
 
-fun <T : Any> tryOrNull(tag: String = "tryOrNull(): ", tryFunc: () -> T): T? {
+fun <T : Any> tryOrNull(tag: String = "tryOrNull(): ", tryFunc: () -> T?): T? {
     return try {
         tryFunc()
     } catch (e: Exception) {
-        Kex.loggE(tag = tag, message = e.getNameAndMessage(), e = e)
+        e.log(tag = tag)
         null
     }
 }

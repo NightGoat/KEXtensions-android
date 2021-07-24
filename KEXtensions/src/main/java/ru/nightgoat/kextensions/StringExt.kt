@@ -1,6 +1,12 @@
 package ru.nightgoat.kextensions
 
 import android.util.Patterns
+import ru.nightgoat.kextensions.utils.constants.KexConstants.EMAIL_PATTERN
+import ru.nightgoat.kextensions.utils.constants.KexConstants.IP_ADDRESS_PATTERN
+import ru.nightgoat.kextensions.utils.constants.KexConstants.PHONE_PATTERN
+import ru.nightgoat.kextensions.utils.constants.KexConstants.ZERO_STRING
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -27,9 +33,28 @@ fun String?.toLongOrDefault(defaultValue: Long): Long {
     return this?.toLongOrNull() ?: defaultValue
 }
 
+fun String?.toBooleanFrom(trueSymbol: String = "1"): Boolean {
+    return this == trueSymbol
+}
+
+fun String?.toBooleanFrom(trueSymbol: String, falseSymbol: String): Boolean? {
+    return when (this) {
+        trueSymbol -> true
+        falseSymbol -> false
+        else -> null
+    }
+}
+
+fun String?.toBooleanFromBinary() = this.toBooleanFrom()
+
+fun String?.toBooleanFromBinaryOrNull(): Boolean? {
+    return this.toBooleanFrom("1", "0")
+}
+
+
 fun String.trimZeros() = this.trimStart('0')
 
-fun String?.orZero() = this ?: "0"
+fun String?.orZero() = this ?: ZERO_STRING
 
 fun String.takeIfNotEmpty() = this.takeIf { it.isNotEmpty() }
 
@@ -63,43 +88,31 @@ fun String.normalize() = this.lowercase().replaceFirstChar {
  * }
  * */
 inline fun <reified T : Enum<*>> String.enumValueOrNull(): T? =
-    T::class.java.enumConstants.firstOrNull { it.name == this }
+    T::class.java.enumConstants?.firstOrNull { it.name == this }
 
 /**
  * get Enum or default value from String by Reflection
  * */
 inline fun <reified T : Enum<*>> String.enumValueOrDefault(default: T): T =
-    T::class.java.enumConstants.firstOrNull { it.name == this } ?: default
+    T::class.java.enumConstants?.firstOrNull { it.name == this } ?: default
 
 fun String.isEmail(): Boolean {
     val pattern = Patterns.EMAIL_ADDRESS ?: Pattern.compile(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+"
+        EMAIL_PATTERN
     )
     return isMatchesRegex(pattern)
 }
 
 fun String.isPhone(): Boolean {
     val pattern = Patterns.PHONE ?: Pattern.compile(
-        "(\\+[0-9]+[\\- \\.]*)?"
-                + "(\\([0-9]+\\)[\\- \\.]*)?"
-                + "([0-9][0-9\\- \\.]+[0-9])"
+        PHONE_PATTERN
     )
 
     return isMatchesRegex(pattern)
 }
 
 fun String.isIPAddress(): Boolean {
-    val ipAddressPatternString =
-        ("((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4]"
-                + "[0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]"
-                + "[0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}"
-                + "|[1-9][0-9]|[0-9]))")
+    val ipAddressPatternString = IP_ADDRESS_PATTERN
     val ipAddressPattern = Pattern.compile(ipAddressPatternString)
     val pattern = Patterns.IP_ADDRESS ?: ipAddressPattern
     return isMatchesRegex(pattern)
@@ -115,4 +128,12 @@ fun String.isMatchesRegex(regex: Pattern): Boolean {
 
 fun String.isMatchesRegex(regex: Regex): Boolean {
     return regex.matches(this)
+}
+
+fun String.toDateFormat(): DateFormat? {
+    return tryOrNull { SimpleDateFormat(this, Locale.getDefault()) }
+}
+
+fun String.toDate(pattern: String): Date? {
+    return tryOrNull { pattern.toDateFormat()?.parse(this) }
 }

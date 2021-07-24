@@ -1,6 +1,5 @@
 package ru.nightgoat.kextensions
 
-import ru.nightgoat.kextensions.utils.Kex
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.round
@@ -51,10 +50,9 @@ fun Double.divWith(other: Double, numberOfZeroes: Int = 3, tag: String? = null):
         val pow = ((this).toBigDecimal() / (other).toBigDecimal()).toDouble()
         pow.roundTo(numberOfZeroes)
     } else {
-        Kex.loggE(
-            "Division by zero: $this / 0",
-            tag = tag ?: "Double.divWith(): ",
-            ArithmeticException()
+        ArithmeticException().log(
+            message = "Division by zero: $this / 0",
+            tag = tag ?: "Double.divWith(): "
         )
         null
     }
