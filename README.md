@@ -42,7 +42,7 @@ class App: Application() {
     }
 }
 ```
-Or if you can just turn it off: 
+Or you can just turn it off: 
 `Kex.turnOffLogger()`
 
 ## How to add it:
