@@ -105,11 +105,6 @@ fun <T, R> List<T>.mapAndFind(map: (T) -> R, find: (R) -> Boolean) = this.asSequ
     .find(find)
 
 /**
- * Turns object to list of this one object or empty if object is null.
- */
-fun <T : Any> T?.toList() = this?.run { listOf(this) }.orEmpty()
-
-/**
  * Swaps elements by entered positions and returns list. Returns not changed list, if second index
  * less or equals than first. Swaps first and last item by default.
  */
@@ -173,4 +168,12 @@ fun <T : Any> MutableList<T>.moveToFirstPosition(findItemBy: (T) -> Boolean): Mu
  */
 fun <T : Any> MutableList<T>.moveToLastPosition(findItemBy: (T) -> Boolean): MutableList<T> {
     return moveToPosition(position = this.lastIndex, findItemBy = findItemBy)
+}
+
+fun <T : Any> MutableList<T>.replaceAt(newItem: T, index: Int) = this.mapIndexed { i, item ->
+    if (index == i) {
+        newItem
+    } else {
+        item
+    }
 }
