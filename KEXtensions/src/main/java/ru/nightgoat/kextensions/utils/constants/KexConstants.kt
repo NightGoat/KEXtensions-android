@@ -21,6 +21,8 @@ object KexConstants {
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                 ")+"
 
+    const val ONLY_DIGITS_PATTERN = "^[0-9]+$"
+
     const val ZERO_STRING = "0"
     const val EMPTY_STRING = ""
 }

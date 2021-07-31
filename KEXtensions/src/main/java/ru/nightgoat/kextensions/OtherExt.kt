@@ -50,3 +50,13 @@ fun <T : Any> T?.logIfNull(message: String, tag: String = "logIfNull"): T? {
  * }
  * */
 fun <T> T?.exists() = this != null
+
+/**
+ * Turns object to list of this one object inside or empty if object is null.
+ */
+fun <T : Any> T?.asList() = this?.run { listOf(this) }.orEmpty()
+
+/**
+ * Turns object to mutable list of this one object inside or empty if object is null.
+ */
+fun <T : Any> T?.asMutableList() = this?.run { mutableListOf(this) } ?: mutableListOf()

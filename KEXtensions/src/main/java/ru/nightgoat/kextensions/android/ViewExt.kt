@@ -18,6 +18,15 @@ fun View.setInvisible(invisible: Boolean = true) {
 }
 
 /**
+ * Extension method to show a keyboard for View.
+ */
+fun View.showKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    this.requestFocus()
+    imm.showSoftInput(this, 0)
+}
+
+/**
  * Try to hide the keyboard and returns whether it worked
  * @author https://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
  */
@@ -30,4 +39,17 @@ fun View.hideKeyboard(): Boolean {
         e.log(tag = "hideKeyboard(): ")
     }
     return false
+}
+
+
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
 }

@@ -1,5 +1,8 @@
 package ru.nightgoat.kextensions.android
 
+import android.os.Build
+import android.util.DisplayMetrics
+import android.view.WindowInsets
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -52,4 +55,30 @@ fun Fragment.longToast(text: String) {
 
 fun Fragment.longToast(text: () -> String) {
     Toast.makeText(requireContext(), text.invoke(), Toast.LENGTH_LONG).show()
+}
+
+inline val Fragment.windowWidth: Int
+    get() {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val metrics = requireActivity().windowManager.currentWindowMetrics
+            val insets = metrics.windowInsets.getInsets(WindowInsets.Type.systemBars())
+            metrics.bounds.width() - insets.left - insets.right
+        } else {
+            val displayMetrics = DisplayMetrics()
+            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        }
+    }
+
+fun Fragment.showKeyboard() {
+    this.view?.postDelayed({
+        activity?.showKeyboard()
+    }, 100L)
+}
+
+/**
+ * Extension method to provide hide keyboard for [Fragment].
+ */
+fun Fragment.hideKeyboard() {
+    activity?.hideKeyboard()
 }

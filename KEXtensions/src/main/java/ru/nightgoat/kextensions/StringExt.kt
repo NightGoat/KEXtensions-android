@@ -1,6 +1,8 @@
 package ru.nightgoat.kextensions
 
 import android.util.Patterns
+import ru.nightgoat.kextensions.utils.constants.DateFormats
+import ru.nightgoat.kextensions.utils.constants.KexConstants
 import ru.nightgoat.kextensions.utils.constants.KexConstants.EMAIL_PATTERN
 import ru.nightgoat.kextensions.utils.constants.KexConstants.IP_ADDRESS_PATTERN
 import ru.nightgoat.kextensions.utils.constants.KexConstants.PHONE_PATTERN
@@ -33,11 +35,14 @@ fun String?.toLongOrDefault(defaultValue: Long): Long {
     return this?.toLongOrNull() ?: defaultValue
 }
 
-fun String?.toBooleanFrom(trueSymbol: String = "1"): Boolean {
+/**
+ * returns True if string matches input symbol. Input symbol is "X" by default.
+ */
+fun String?.isTrue(trueSymbol: String = "X"): Boolean {
     return this == trueSymbol
 }
 
-fun String?.toBooleanFrom(trueSymbol: String, falseSymbol: String): Boolean? {
+fun String?.toBooleanFrom(trueSymbol: String = "X", falseSymbol: String = ""): Boolean? {
     return when (this) {
         trueSymbol -> true
         falseSymbol -> false
@@ -45,9 +50,9 @@ fun String?.toBooleanFrom(trueSymbol: String, falseSymbol: String): Boolean? {
     }
 }
 
-fun String?.toBooleanFromBinary() = this.toBooleanFrom()
+fun String?.isTrueBinary() = this.isTrue("1")
 
-fun String?.toBooleanFromBinaryOrNull(): Boolean? {
+fun String?.isTrueBinaryOrNull(): Boolean? {
     return this.toBooleanFrom("1", "0")
 }
 
@@ -111,6 +116,11 @@ fun String.isPhone(): Boolean {
     return isMatchesRegex(pattern)
 }
 
+fun String.isNumeric(): Boolean {
+    val pattern = KexConstants.ONLY_DIGITS_PATTERN
+    return isMatchesRegex(pattern)
+}
+
 fun String.isIPAddress(): Boolean {
     val ipAddressPatternString = IP_ADDRESS_PATTERN
     val ipAddressPattern = Pattern.compile(ipAddressPatternString)
@@ -134,6 +144,45 @@ fun String.toDateFormat(): DateFormat? {
     return tryOrNull { SimpleDateFormat(this, Locale.getDefault()) }
 }
 
-fun String.toDate(pattern: String): Date? {
+fun String.toDate(pattern: String = DateFormats.DATE_FORMAT_dd_mm_yyyy): Date? {
     return tryOrNull { pattern.toDateFormat()?.parse(this) }
+}
+
+fun String.toDateOrNow(pattern: String = DateFormats.DATE_FORMAT_dd_mm_yyyy): Date {
+    return tryOrNull { pattern.toDateFormat()?.parse(this) } ?: Date()
+}
+
+fun String.formatDateOrNull(
+    sourcePattern: String = DateFormats.DATE_FORMAT_dd_mm_yyyy,
+    destinationPattern: String = DateFormats.DATE_FORMAT_yyyyMMdd,
+): String? {
+    return this.toDate(sourcePattern)?.toStringFormatted(destinationPattern)
+}
+
+/**
+ * Formats date string to another date string.
+ * @param sourcePattern date pattern of this string
+ * @param destinationPattern date pattern you want this string to be presetned it
+ * or returns default value, that is this string if nothing is provided
+ */
+fun String.formatDate(
+    sourcePattern: String = DateFormats.DATE_FORMAT_dd_mm_yyyy,
+    destinationPattern: String = DateFormats.DATE_FORMAT_yyyyMMdd,
+    defaultValue: String = this
+): String {
+    return this.formatDateOrNull(sourcePattern, destinationPattern) ?: defaultValue
+}
+
+fun String.now(pattern: String = DateFormats.DATE_FORMAT_dd_mm_yyyy): String {
+    return Date().toStringFormatted(pattern)
+}
+
+fun String.equalsIgnoreCase(other: String) = this.lowercase().contentEquals(other.lowercase())
+
+fun String.removeSpaces(): String {
+    return replace(" ", "")
+}
+
+fun String.removeLineBreaks(): String {
+    return replace("\n", "").replace("\r", "")
 }
