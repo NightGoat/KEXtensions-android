@@ -22,7 +22,7 @@ fun foo(bar: Int) {
    doStuff(bar)
 }
 ```
-Or if you have string from server with date like this: 2021-04-20, and you want it to be in Java's Date, you can use [StringExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/StringExt.kt): and date format constants:
+Or if you have string from server with date like this: 2021-04-20, and you want it to be in Java's Date, you can use [StringExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/StringExt.kt): and [DateFormat constants](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/utils/constants/DateFormats.kt):
 ```
 val serverString = "2021-04-20"
 val newDate = serverString.toDate(DATE_FORMAT_yyyy_mm_dd)
