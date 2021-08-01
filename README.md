@@ -9,8 +9,9 @@ As Android developer, i use in my work Kotlin as main coding language, and Kotli
 Using this library does not require knowledge or skill, this extensions will work as part of Kotlin language. For example:
 You have liveData, and you want to get value from it, but your method requires non null values, you can use extension from [IntExt](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/IntExt.kt): orZero():
 ```
-val number = liveData {
-	emit(2+2)
+val number: LiveData<Int?> = liveData {
+	val result = getNumber()
+	emit(result)
 }
 
 fun main {
@@ -20,6 +21,19 @@ fun main {
 fun foo(bar: Int) {
    doStuff(bar)
 }
+```
+Or if you have string from server with date like this: 2021.04.20, and you want it to be in Java's Date, you can use StringExt and date format constants:
+```
+val serverString = "2021-04-20"
+val newDate = serverString.toDate(DATE_FORMAT_yyyy_mm_dd)
+```
+if you want it back in another string, you can use this
+```
+newDate.toStringFormatted(DATE_FORMAT_dd_mm_yyyy)
+```
+or just use formatDate in first place:
+```
+serverString.formatDate(DATE_FORMAT_yyyy_mm_dd, DATE_FORMAT_dd_mm_yyyy)
 ```
 
 ## Logging
@@ -43,7 +57,9 @@ class App: Application() {
 }
 ```
 Or you can just turn it off: 
-```Kex.turnOffLogger()```
+```
+Kex.turnOffLogger()
+```
 
 ## How to add it:
 * Step 1. Add the JitPack repository to your build file
