@@ -16,23 +16,28 @@ sealed class Try<T> {
      * @throws Throwable
      */
     fun getOrThrow(): T {
-        return when (this) {
-            is Success -> this.data
-            is Failure -> throw throwable
+        return either {
+            throw it
         }
     }
 
     fun getOrNull(): T? {
-        return when (this) {
+        return return when (this) {
             is Success -> this.data
             is Failure -> null
         }
     }
 
     fun getOrDefault(doBlock: () -> T): T {
+        return either {
+            doBlock()
+        }
+    }
+
+    private fun either(failureBlock: (Throwable) -> T): T {
         return when (this) {
-            is Success -> this.getOrThrow()
-            is Failure -> doBlock()
+            is Success -> this.data
+            is Failure -> failureBlock(this.throwable)
         }
     }
 
