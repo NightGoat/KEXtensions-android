@@ -2,6 +2,7 @@ package ru.nightgoat.kextensions
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import ru.nightgoat.kextensions.utils.Try
 import java.util.*
 
 /**
@@ -33,21 +34,17 @@ fun <T : Any> tryOrDefault(
     tag: String = "tryOrDefault(): ",
     tryFunc: () -> T?
 ): T {
-    return try {
+    return Try.of(tag) {
         tryFunc() ?: defaultValue
-    } catch (e: Exception) {
-        e.log(tag = tag)
+    }.getOrDefault {
         defaultValue
     }
 }
 
 fun <T : Any> tryOrNull(tag: String = "tryOrNull(): ", tryFunc: () -> T?): T? {
-    return try {
+    return Try.of(tag) {
         tryFunc()
-    } catch (e: Exception) {
-        e.log(tag = tag)
-        null
-    }
+    }.getOrNull()
 }
 
 fun tryOrEmpty(tag: String = "tryOrEmpty(): ", tryFunc: () -> String) =

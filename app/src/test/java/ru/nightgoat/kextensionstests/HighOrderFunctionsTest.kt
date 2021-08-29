@@ -2,10 +2,8 @@ package ru.nightgoat.kextensionstests
 
 import org.junit.Assert
 import org.junit.Test
-import ru.nightgoat.kextensions.tryOrDefault
-import ru.nightgoat.kextensions.tryOrEmpty
-import ru.nightgoat.kextensions.tryOrNow
-import ru.nightgoat.kextensions.tryOrNull
+import ru.nightgoat.kextensions.*
+import ru.nightgoat.kextensions.utils.constants.DateFormats.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss
 import java.util.*
 
 class HighOrderFunctionsTest {
@@ -65,7 +63,10 @@ class HighOrderFunctionsTest {
             now = Date()
             throw NullPointerException()
         }
-        Assert.assertEquals(now, foo)
+        Assert.assertEquals(
+            now?.toStringFormatted(DATE_FORMAT_yyyy_MM_dd_HH_mm_ss),
+            foo.toStringFormatted(DATE_FORMAT_yyyy_MM_dd_HH_mm_ss)
+        )
     }
 
     @Test
