@@ -77,3 +77,4 @@ fun Double.reverse() = this.unaryMinus()
 
 fun Double.takeIfZero() = this.takeIf { it == 0.0 }
 fun Double.takeIfNotZero() = this.takeIf { it != 0.0 }
+fun Double.takeIfNotNegative() = this.takeIf { it >= 0.0 }

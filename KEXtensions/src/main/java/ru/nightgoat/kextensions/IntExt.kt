@@ -16,6 +16,8 @@ fun Int.takeIfNotZero() = this.takeIf { it != 0 }
 fun Int?.toStringOrEmpty() = this?.toString().orEmpty()
 fun Int.takeIfZeroOrEmpty() = this.takeIf { it == 0 }?.toStringOrEmpty()
 
+fun Int.takeIfNotNegative() = this.takeIf { it >= 0 }
+
 fun Int?.isTrue(trueInt: Int = 1) = this == trueInt
 fun Int?.isFalse(falseInt: Int = 0) = this == falseInt
 
