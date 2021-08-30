@@ -29,7 +29,7 @@ fun <T, V> T?.orLet(variable: V?, letBlock: (V) -> T) = this ?: variable?.let(le
  */
 fun <T : Any> T?.logIfNull(message: String, tag: String = "logIfNull"): T? {
     if (this == null) {
-        Kex.loggE(tag, message)
+        Kex.loggE(message, tag)
     }
     return this
 }
