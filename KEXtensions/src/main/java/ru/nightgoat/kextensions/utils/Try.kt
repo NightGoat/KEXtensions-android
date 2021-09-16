@@ -22,7 +22,7 @@ sealed class Try<T> {
     }
 
     fun getOrNull(): T? {
-        return return when (this) {
+        return when (this) {
             is Success -> this.data
             is Failure -> null
         }
