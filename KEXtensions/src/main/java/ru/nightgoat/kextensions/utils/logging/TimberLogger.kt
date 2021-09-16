@@ -11,4 +11,12 @@ object TimberLogger : ILogger {
             Timber.e(e, message)
         }
     }
+
+    override fun loggD(message: String, tag: String?) {
+        tag?.let {
+            Timber.tag(it).d(message)
+        }.orIfNull {
+            Timber.d(message)
+        }
+    }
 }

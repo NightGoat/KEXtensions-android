@@ -50,4 +50,10 @@ object Kex {
             logger.loggE(message, tag, throwable)
         }
     }
+
+    fun loggD(message: String, tag: String? = null) {
+        if (isLoggerOn) {
+            logger.loggD(message, tag)
+        }
+    }
 }
