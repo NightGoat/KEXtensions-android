@@ -1,7 +1,9 @@
 package ru.nightgoat.kextensions
 
+import ru.nightgoat.kextensions.utils.constants.DateFormats
 import ru.nightgoat.kextensions.utils.constants.DateFormats.DATE_FORMAT_dd_mm_yyyy
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 /**
@@ -18,4 +20,8 @@ fun Date?.orNow() = this ?: Date()
  */
 fun Date.toStringFormatted(pattern: String = DATE_FORMAT_dd_mm_yyyy): String {
     return tryOrEmpty { SimpleDateFormat(pattern, Locale.getDefault()).format(this) }
+}
+
+fun Date.rebuildWithFormat(format: String = DATE_FORMAT_dd_mm_yyyy) = tryOrNull {
+    this.toStringFormatted(format).toDate(format)
 }
