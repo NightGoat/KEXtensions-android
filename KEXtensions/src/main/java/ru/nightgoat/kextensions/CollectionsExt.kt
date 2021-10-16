@@ -41,6 +41,17 @@ fun <T: Any> Iterable<T>.findIndexed(predicate: (T) -> Boolean): Pair<Int, T>? {
     return null
 }
 
+fun <T: Any> Iterable<T>.findLastIndexed(predicate: (T) -> Boolean): Pair<Int, T>? {
+    var last: Pair<Int, T>? = null
+
+    this.forEachIndexed { index, t ->
+        if (predicate(t)) {
+            last = Pair(index, t)
+        }
+    }
+    return last
+}
+
 /**
  * Distincts and filters Iterable in one cycle. Faster that using
  * list.distinctBy {  }.filter {  }
