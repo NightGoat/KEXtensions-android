@@ -32,6 +32,15 @@ fun <T> MutableCollection<T>.addIf(whatToAdd: T, predicate: (MutableCollection<T
     if (predicate.invoke(this)) this.add(whatToAdd)
 }
 
+fun <T: Any> Iterable<T>.findIndexed(predicate: (T) -> Boolean): Pair<Int, T>? {
+    this.forEachIndexed { index, t ->
+        if (predicate(t)) {
+            return Pair(index, t)
+        }
+    }
+    return null
+}
+
 /**
  * Distincts and filters Iterable in one cycle. Faster that using
  * list.distinctBy {  }.filter {  }
