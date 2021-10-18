@@ -197,3 +197,7 @@ fun <T : Any> MutableList<T>.replaceAt(newItem: T, index: Int) = this.mapIndexed
         item
     }
 }
+
+fun <T: Any> List<T>.takeIfNotEmpty(): List<T>? {
+    return this.takeIf { this.isNotEmpty() }
+}
