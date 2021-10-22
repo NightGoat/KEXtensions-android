@@ -202,9 +202,17 @@ fun <T: Any> List<T>.takeIfNotEmpty(): List<T>? {
     return this.takeIf { this.isNotEmpty() }
 }
 
-fun <T: Any> MutableList<T>.changeElementBy(item: T, findItemBy: (T) -> Boolean ) = this.map {
+fun <T: Any> Iterable<T>.changeElementBy(item: T, findItemBy: (T) -> Boolean ) = this.map {
     if (findItemBy(it)){
         item
+    } else {
+        it
+    }
+}
+
+fun <T: Any> Iterable<T>.changeElementBy(itemModification: (T) -> T, findItemBy: (T) -> Boolean ) = this.map {
+    if (findItemBy(it)){
+        itemModification(it)
     } else {
         it
     }
