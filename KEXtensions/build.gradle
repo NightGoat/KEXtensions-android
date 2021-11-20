@@ -42,18 +42,11 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 }
 
-
-task androidSourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
 project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                artifact androidSourcesJar // optional sources
             }
         }
     }
