@@ -32,6 +32,26 @@ fun <T> MutableCollection<T>.addIf(whatToAdd: T, predicate: (MutableCollection<T
     if (predicate.invoke(this)) this.add(whatToAdd)
 }
 
+fun <T: Any> Iterable<T>.findIndexed(predicate: (T) -> Boolean): Pair<Int, T>? {
+    this.forEachIndexed { index, t ->
+        if (predicate(t)) {
+            return Pair(index, t)
+        }
+    }
+    return null
+}
+
+fun <T: Any> Iterable<T>.findLastIndexed(predicate: (T) -> Boolean): Pair<Int, T>? {
+    var last: Pair<Int, T>? = null
+
+    this.forEachIndexed { index, t ->
+        if (predicate(t)) {
+            last = Pair(index, t)
+        }
+    }
+    return last
+}
+
 /**
  * Distincts and filters Iterable in one cycle. Faster that using
  * list.distinctBy {  }.filter {  }
@@ -175,5 +195,25 @@ fun <T : Any> MutableList<T>.replaceAt(newItem: T, index: Int) = this.mapIndexed
         newItem
     } else {
         item
+    }
+}
+
+fun <T: Any> List<T>.takeIfNotEmpty(): List<T>? {
+    return this.takeIf { this.isNotEmpty() }
+}
+
+fun <T: Any> Iterable<T>.changeElementBy(item: T, findItemBy: (T) -> Boolean ) = this.map {
+    if (findItemBy(it)){
+        item
+    } else {
+        it
+    }
+}
+
+fun <T: Any> Iterable<T>.changeElementBy(itemModification: (T) -> T, findItemBy: (T) -> Boolean ) = this.map {
+    if (findItemBy(it)){
+        itemModification(it)
+    } else {
+        it
     }
 }
