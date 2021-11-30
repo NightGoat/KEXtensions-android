@@ -16,10 +16,10 @@ class TryTest {
 
     @Test
     fun try_test_2() {
-        val error = Try {
+        val success = Try {
             2 / 2
         }
-        Assert.assertTrue(error.isSuccess())
+        Assert.assertTrue(success.isSuccess())
     }
 
     @Test
