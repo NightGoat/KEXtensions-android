@@ -83,6 +83,14 @@ sealed class Try<T> {
         }
     }
 
+    inline fun finally(doFun: (T?) -> Unit): Try<T> {
+        when (this) {
+            is Success -> doFun(this.data)
+            else -> doFun(null)
+        }
+        return this
+    }
+
     companion object {
         /**
          * Same as invoke
@@ -97,12 +105,21 @@ sealed class Try<T> {
             }
         }
 
-        inline operator fun <T> invoke(tag: String? = null, tryBlock: () -> T): Try<T> {
+        inline operator fun <T> invoke(
+            tag: String? = null,
+            finallyBlock: (T?) -> Unit = {},
+            tryBlock: () -> T
+        ): Try<T> {
+            var result: T? = null
             return try {
-                Success(tryBlock())
+                Success(tryBlock()).also {
+                    result = it.data
+                }
             } catch (t: Throwable) {
                 t.log(tag)
                 Failure(t)
+            } finally {
+                finallyBlock(result)
             }
         }
     }

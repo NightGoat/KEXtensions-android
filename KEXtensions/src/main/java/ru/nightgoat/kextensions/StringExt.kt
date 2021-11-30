@@ -187,14 +187,14 @@ fun String.removeLineBreaks(): String {
     return replace("\n", "").replace("\r", "")
 }
 
-inline fun String.ifNotEmpty(doFun: () -> Unit) {
+inline fun String.ifNotEmpty(doFun: (String) -> Unit) {
     if (this.isNotEmpty()) {
-        doFun()
+        doFun(this)
     }
 }
 
-inline fun String.ifNotBlank(doFun: () -> Unit) {
+inline fun String.ifNotBlank(doFun: (String) -> Unit) {
     if (this.isNotBlank()) {
-        doFun()
+        doFun(this)
     }
 }

@@ -195,4 +195,22 @@ class StringExtTest {
     fun isIPAddress_test_2() {
         Assert.assertFalse("Hello world!".isIPAddress())
     }
+
+    @Test
+    fun ifNotEmpty_test_1() {
+        var variable = emptyString
+        notEmptyString.ifNotEmpty {
+            variable = it
+        }
+        Assert.assertEquals(variable, notEmptyString)
+    }
+
+    @Test
+    fun ifNotEmpty_test_2() {
+        var variable = notEmptyString
+        emptyString.ifNotEmpty {
+            variable = it
+        }
+        Assert.assertEquals(variable, notEmptyString)
+    }
 }
