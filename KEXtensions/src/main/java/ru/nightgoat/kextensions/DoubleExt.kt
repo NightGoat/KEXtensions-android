@@ -21,6 +21,14 @@ fun Double?.orZero(): Double {
     return this ?: 0.0
 }
 
+fun Double?.toIntOrZero(): Int {
+    return this?.toInt().orZero()
+}
+
+fun Double?.toLongOrZero(): Long {
+    return this?.toLong().orZero()
+}
+
 /**
  * Basic algebraic functions, helps to avoid Floating Point Math errors
  */

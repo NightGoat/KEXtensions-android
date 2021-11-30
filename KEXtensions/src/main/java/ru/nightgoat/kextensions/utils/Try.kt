@@ -6,6 +6,10 @@ import ru.nightgoat.kextensions.log
  * Fork of Try class, slightly modified
  * @author bijukunjummen
  * @see <a href="https://bijukunjummen.medium.com/deriving-a-kotlin-try-type-c3a544411b5a">from Medium article</a>
+ *
+ * how to use: call val isOk = Try { 2 / 0 } will give you Failure, calling isOk.getOrNull() will give you null
+ *
+ * Same as kotlin runCatching method.
  */
 sealed class Try<T> {
 
@@ -72,9 +76,28 @@ sealed class Try<T> {
         return this
     }
 
-    companion object {
+    fun toResult(): Result<T> {
+        return when (this) {
+            is Success -> Result.success(this.data)
+            is Failure -> Result.failure(this.throwable)
+        }
+    }
 
-        fun <T> of(tag: String? = null, tryBlock: () -> T): Try<T> {
+    companion object {
+        /**
+         * Same as invoke
+         */
+        @Deprecated("Use invoke instead, just remove .of")
+        inline fun <T> of(tag: String? = null, tryBlock: () -> T): Try<T> {
+            return try {
+                Success(tryBlock())
+            } catch (t: Throwable) {
+                t.log(tag)
+                Failure(t)
+            }
+        }
+
+        inline operator fun <T> invoke(tag: String? = null, tryBlock: () -> T): Try<T> {
             return try {
                 Success(tryBlock())
             } catch (t: Throwable) {

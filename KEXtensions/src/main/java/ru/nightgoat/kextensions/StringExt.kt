@@ -186,3 +186,15 @@ fun String.removeSpaces(): String {
 fun String.removeLineBreaks(): String {
     return replace("\n", "").replace("\r", "")
 }
+
+inline fun String.ifNotEmpty(doFun: () -> Unit) {
+    if (this.isNotEmpty()) {
+        doFun()
+    }
+}
+
+inline fun String.ifNotBlank(doFun: () -> Unit) {
+    if (this.isNotBlank()) {
+        doFun()
+    }
+}

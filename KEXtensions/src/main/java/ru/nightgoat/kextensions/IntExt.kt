@@ -44,3 +44,7 @@ fun Int?.divideSafeOrZero(divideBy: Int) = if (this != null && divideBy != 0) {
 }
 
 fun Int.convertSecondsToMilliseconds(): Long = this * 1000L
+
+fun Int?.toDoubleOrZero() = this?.toDouble().orZero()
+
+fun Int?.toLongOrZero() = this?.toLong().orZero()
