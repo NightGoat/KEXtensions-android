@@ -16,3 +16,6 @@ fun Long?.toStringOrEmpty() = this?.toString().orEmpty()
 fun Long.takeIfZeroOrEmpty() = this.takeIf { it == 0L }?.toStringOrEmpty()
 
 fun Long.takeIfNotNegative() = this.takeIf { it >= 0 }
+
+fun Long?.toDoubleOrZero() = this?.toDouble().orZero()
+fun Long?.toIntOrZero() = this?.toInt().orZero()
