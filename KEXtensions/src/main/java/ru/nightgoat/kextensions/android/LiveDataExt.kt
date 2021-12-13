@@ -44,7 +44,7 @@ fun <T : Any> MutableLiveData<T>.tryToSetValue(newValue: T) {
         val message = "KEXception: posting value in background thread!"
         val tag = "tryToSetValue(): "
         e.log(message, tag)
-        postValue(value)
+        postValue(newValue)
     }
 }
 
@@ -55,7 +55,7 @@ fun <T : Any> MutableLiveData<T>.tryToSetValue(newValue: () -> T) {
         val message = "KEXception: posting value in background thread!"
         val tag = "tryToSetValue(): "
         e.log(message, tag)
-        postValue(value)
+        postValue(newValue())
     }
 }
 
