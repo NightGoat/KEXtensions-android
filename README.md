@@ -37,7 +37,7 @@ serverString.formatDate(DATE_FORMAT_yyyy_mm_dd, DATE_FORMAT_dd_mm_yyyy)
 ```
 
 ## Logging
-Some extensions do require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is ordinary Android Log.e tool, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (of course you need to have Timber in your graddle dependencies):
+Some extensions do require logging, as they catching exceptions or catching null values from some places. Default Logger in this library is println() fun, but you can change it to any you want. Its already has Timber, so if you want to use it you need set it in your app starting point (Application or Activity) like this (of course you need to have Timber in your graddle dependencies):
 ```
 Kex.setTimber()
 ```
@@ -75,7 +75,7 @@ Add it in your root build.gradle at the end of repositories:
 * Step 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.nightgoat:kextensions:0.1.4'
+	        implementation 'com.github.nightgoat:kextensions:1.0.2'
 	}
 ```
 
