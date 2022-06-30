@@ -25,18 +25,6 @@ class DoubleExtTest {
     }
 
     @Test
-    fun orZero_test_1() {
-        val foo: Double? = null
-        Assert.assertEquals(0.0, foo.orZero(), 0.0)
-    }
-
-    @Test
-    fun orZero_test_2() {
-        val foo = 42.0
-        Assert.assertEquals(42.0, foo.orZero(), 0.0)
-    }
-
-    @Test
     fun sumWith_test_1() {
         val foo = 0.1
         val bar = 0.2

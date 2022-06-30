@@ -2,6 +2,7 @@ package ru.nightgoat.kextensions.utils.logging
 
 import android.annotation.SuppressLint
 import android.util.Log
+import io.github.nightgoat.kexcore.utils.logging.ILogger
 
 @SuppressLint("LogNotTimber")
 object AndroidLogger : ILogger {

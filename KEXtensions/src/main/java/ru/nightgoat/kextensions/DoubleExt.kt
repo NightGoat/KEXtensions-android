@@ -1,6 +1,7 @@
 package ru.nightgoat.kextensions
 
-import kotlin.math.abs
+import io.github.nightgoat.kexcore.log
+import io.github.nightgoat.kexcore.orIfNull
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -15,18 +16,6 @@ fun Double?.dropZeros(): String {
         String.format("%d", this.toLong())
     else
         String.format("%s", this)
-}
-
-fun Double?.orZero(): Double {
-    return this ?: 0.0
-}
-
-fun Double?.toIntOrZero(): Int {
-    return this?.toInt().orZero()
-}
-
-fun Double?.toLongOrZero(): Long {
-    return this?.toLong().orZero()
 }
 
 /**
@@ -77,12 +66,3 @@ fun Double?.toStringWithoutScientificNotation(): String {
         }
     }.orIfNull { "0" }
 }
-
-fun Double.toNegative() = -abs(this)
-fun Double.toPositive() = abs(this)
-
-fun Double.reverse() = this.unaryMinus()
-
-fun Double.takeIfZero() = this.takeIf { it == 0.0 }
-fun Double.takeIfNotZero() = this.takeIf { it != 0.0 }
-fun Double.takeIfNotNegative() = this.takeIf { it >= 0.0 }
