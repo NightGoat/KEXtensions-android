@@ -1,60 +1,14 @@
 package ru.nightgoat.kextensionstests
 
+import io.github.nightgoat.kexcore.utils.constants.DateFormats.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss
 import org.junit.Assert
 import org.junit.Test
-import ru.nightgoat.kextensions.*
-import ru.nightgoat.kextensions.utils.constants.DateFormats.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss
+import ru.nightgoat.kextensions.toStringFormatted
+import ru.nightgoat.kextensions.tryOrNow
 import java.util.*
 
 class HighOrderFunctionsTest {
 
-    @Test
-    fun tryOrDefault_test_1() {
-        val foo = tryOrDefault(1) {
-            throw NullPointerException()
-        }
-        Assert.assertEquals(1, foo)
-    }
-
-    @Test
-    fun tryOrDefault_test_2() {
-        val foo = tryOrDefault(1) {
-            2
-        }
-        Assert.assertEquals(2, foo)
-    }
-
-    @Test
-    fun tryOrNull_test_1() {
-        val foo = tryOrNull {
-            throw NullPointerException()
-        }
-        Assert.assertNull(foo)
-    }
-
-    @Test
-    fun tryOrNull_test_2() {
-        val foo = tryOrNull {
-            1
-        }
-        Assert.assertEquals(1, foo)
-    }
-
-    @Test
-    fun tryOrEmpty_test_1() {
-        val foo = tryOrEmpty {
-            throw NullPointerException()
-        }
-        Assert.assertEquals("", foo)
-    }
-
-    @Test
-    fun tryOrEmpty_test_2() {
-        val foo = tryOrEmpty {
-            "bar"
-        }
-        Assert.assertEquals("bar", foo)
-    }
 
     @Test
     fun tryOrNow_test_1() {

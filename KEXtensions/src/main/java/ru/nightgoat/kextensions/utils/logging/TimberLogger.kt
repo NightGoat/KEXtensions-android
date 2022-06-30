@@ -1,6 +1,7 @@
 package ru.nightgoat.kextensions.utils.logging
 
-import ru.nightgoat.kextensions.orIfNull
+import io.github.nightgoat.kexcore.orIfNull
+import io.github.nightgoat.kexcore.utils.logging.ILogger
 import timber.log.Timber
 
 object TimberLogger : ILogger {
