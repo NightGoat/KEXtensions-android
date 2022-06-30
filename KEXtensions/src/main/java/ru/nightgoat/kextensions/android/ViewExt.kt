@@ -3,7 +3,7 @@ package ru.nightgoat.kextensions.android
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import ru.nightgoat.kextensions.log
+import io.github.nightgoat.kexcore.log
 
 fun View.setVisible(visibility: Boolean = true) {
     this.visibility = if (visibility) View.VISIBLE else View.GONE

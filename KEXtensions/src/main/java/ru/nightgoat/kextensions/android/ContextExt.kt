@@ -14,9 +14,9 @@ import android.provider.Settings
 import android.text.format.Formatter
 import android.util.TypedValue
 import androidx.annotation.RequiresApi
-import ru.nightgoat.kextensions.log
-import ru.nightgoat.kextensions.logIfNull
-import ru.nightgoat.kextensions.orIfNull
+import io.github.nightgoat.kexcore.log
+import io.github.nightgoat.kexcore.logIfNull
+import io.github.nightgoat.kexcore.orIfNull
 import kotlin.system.exitProcess
 
 @Suppress("DEPRECATION")

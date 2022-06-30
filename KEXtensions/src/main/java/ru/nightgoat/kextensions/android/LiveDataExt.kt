@@ -6,9 +6,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
-import ru.nightgoat.kextensions.log
-import ru.nightgoat.kextensions.logIfNull
-import ru.nightgoat.kextensions.orEmptyMutable
+import io.github.nightgoat.kexcore.log
+import io.github.nightgoat.kexcore.logIfNull
+import io.github.nightgoat.kexcore.orEmptyMutable
 
 fun MutableLiveData<Boolean>.revert() {
     value?.let {

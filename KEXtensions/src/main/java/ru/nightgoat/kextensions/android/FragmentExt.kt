@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.nightgoat.kextensions.unsafeLazy
+import io.github.nightgoat.kexcore.unsafeLazy
 
 fun <T : ViewModel> Fragment.provideViewModel(clazz: Class<T>): T {
     return ViewModelProvider(this).get(clazz)

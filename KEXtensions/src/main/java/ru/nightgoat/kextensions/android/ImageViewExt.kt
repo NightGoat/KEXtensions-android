@@ -1,7 +1,7 @@
 package ru.nightgoat.kextensions.android
 
 import android.widget.ImageView
-import ru.nightgoat.kextensions.log
+import io.github.nightgoat.kexcore.log
 
 fun ImageView.setIcon(iconRes: Int) {
     try {

@@ -1,8 +1,8 @@
 package ru.nightgoat.kextensions.android
 
 import androidx.lifecycle.*
+import io.github.nightgoat.kexcore.log
 import kotlinx.coroutines.*
-import ru.nightgoat.kextensions.log
 
 fun ViewModel.launchUITryCatch(
     start: CoroutineStart = CoroutineStart.DEFAULT,
