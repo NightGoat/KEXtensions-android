@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/NightGoat/KEXtensions.svg)](https://jitpack.io/#NightGoat/KEXtensions)
 # KEXtensions
-Kotlin and Android extensions library.
+This is extended version of Kotlin extensions library [Kextensions-core](https://github.com/NightGoat/KEXtensions-core) with added Android extensions and Kotlin-Jvm extensions.
 
 ## About:
 As Android developer, i use in my work Kotlin as main coding language, and Kotlin has a big killer feature - [extensions](https://kotlinlang.org/docs/extensions.html). Some extensions, such as [orIfNull](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/OtherExt.kt) or [doOnDefault](https://github.com/NightGoat/KEXtensions/blob/master/KEXtensions/src/main/java/ru/nightgoat/kextensions/HighOrderFunctions.kt) I have been using many many times in alot of projects, and get kinda tired of copying this code in all projects, so this library was born.
